@@ -1,0 +1,28 @@
+version: "3.8"
+
+services:
+  app:
+    build: .
+    container_name: ecommerce-app
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://tramway.proxy.rlwy.net:24844/railway
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: dFUkYNGqlNJOVyjPCnfLQAupCLyJUQcV
+      SPRING_JPA_HIBERNATE_DDL_AUTO: update
+      SPRING_JPA_SHOW_SQL: "true"
+    depends_on:
+      - db
+    restart: always
+
+  db:
+    image: postgres:16
+    container_name: ecommerce-db
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: dFUkYNGqlNJOVyjPCnfLQAupCLyJUQcV
+      POSTGRES_DB: railway
+    ports:
+      - "24844:5432"
+    restart: always
