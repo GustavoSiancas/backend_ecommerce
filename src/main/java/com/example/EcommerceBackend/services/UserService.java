@@ -21,7 +21,7 @@ public class UserService {
 
     public LoginResponse login(LoginRequest loginRequest){
         User user = userRepository.findByEmail(loginRequest.email()).get();
-        if(user != null && passwordEncoder.matches(loginRequest.password(), user.getPassword())){
+        if(user != null && loginRequest.password().equals(user.getPassword())){
             return new LoginResponse(
                 "token",
                 user.getId(),
@@ -44,7 +44,7 @@ public class UserService {
         }
         User newUser = new User();
         newUser.setEmail(registerRequest.email());
-        newUser.setPassword(passwordEncoder.encode(registerRequest.password()));
+        newUser.setPassword(registerRequest.password());
         newUser.setNames(registerRequest.names());
         newUser.setLastname(registerRequest.lastname());
         newUser.setPhone(registerRequest.phone());
