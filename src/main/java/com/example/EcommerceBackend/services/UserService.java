@@ -71,8 +71,8 @@ public class UserService {
 
     public Boolean changePassword(ChangePassword changePassword){
         User user = userRepository.findById(changePassword.id()).get();
-        if(passwordEncoder.matches(changePassword.oldPassword(), user.getPassword())){
-            user.setPassword(passwordEncoder.encode(changePassword.newPassword()));
+        if(user.getPassword().equals(changePassword.oldPassword())){
+            user.setPassword(changePassword.newPassword());
             userRepository.save(user); 
             return true;
         
