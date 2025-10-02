@@ -47,7 +47,7 @@ public class Products {
     @Column(nullable = false)
     private Category category;
 
-    @Enumerated
+    @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private Status status;
 
