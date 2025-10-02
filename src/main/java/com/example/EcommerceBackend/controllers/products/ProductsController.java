@@ -39,6 +39,11 @@ public class ProductsController {
     public ResponseEntity<List<ProductsResponse>> getAllProductsbyUserId(@PathVariable Long id){
         return ResponseEntity.ok(productsService.getAllProductsbyUserId(id));
     }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<ProductsResponse> getProductById(@PathVariable Long id){
+        return ResponseEntity.ok(productsService.getProductById(id));
+    }
     
     @GetMapping("/status/{status}")
     public ResponseEntity<List<ProductsResponse>> getAllActiveProducts(@PathVariable Status status){

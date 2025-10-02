@@ -2,6 +2,7 @@ package com.example.EcommerceBackend.services;
 
 import java.util.List;
 
+import org.springframework.security.access.method.P;
 import org.springframework.stereotype.Service;
 
 import com.example.EcommerceBackend.controllers.products.response.ProductsResponse;
@@ -51,7 +52,22 @@ public class ProductsService {
             newProduct.getCategory()
         );
     }
-    
+
+    public ProductsResponse getProductById(Long id){
+        Products product = productsRepository.findById(id).get();
+        return new ProductsResponse(
+            product.getId(),
+            product.getName(),
+            product.getPrice(),
+            product.getImageUrl(),
+            product.getRating(),
+            product.getDescription(),
+            product.getStock(),
+            product.getStatus(),
+            product.getCategory()
+        );
+    }
+
     public List<ProductsResponse> getallActiveProducts(Status status){
         List<Products> products = productsRepository.findByStatus(status);
         return products.stream().map(product -> new ProductsResponse(
